@@ -64,14 +64,3 @@ with open(output_path, 'w') as csvfile:
     csvwriter.writerow('Average Revenue Change: $' + str(average_change) + '\n')
     csvwriter.writerow('Greatest Increase in Revenue: $ ' + str(gt_revenue_increase) + gt_revenue_increase_month)
     csvwriter.writerow('Greatest Decrease in Revenue: $'  + str(gt_revenue_decrease) + gt_revenue_decrease_month)
-    
-    
-
-   
-    
-
-
-
-
-
-        
