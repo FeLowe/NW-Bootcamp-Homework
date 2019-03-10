@@ -43,27 +43,27 @@ with open(file) as csvfile:
         total_prof_loss += prof_loss [row] 
     print total_prof_loss
      # Average Calculation       
-average_change = (total_prof_loss / total_months) 
+average_change = round(total_prof_loss / total_months,2) 
 print average_change
 
 # Specify the file to write to
-output_path = os.path.join("pybank_output.csv")
+output_path = os.path.join("pybank_output.txt")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
 with open(output_path, 'w') as csvfile:
 
     # Initialize csv.writer
-    csvwriter = csv.writer(csvfile, delimiter=',')
+    csvwriter = csv.writer(csvfile)
 
     # Write the first row (column headers)
     csvwriter.writerow('Financial Analysis\n')
     csvwriter.writerow('----------------------------' + '\n')
     # Write the second row
     csvwriter.writerow('Total Months: ' + str(total_months) + '\n')
-    csvwriter.writerow('Total Revenue: $' + str(total_prof_loss) + '\n') 
-    csvwriter.writerow('Average Revenue Change: $' + str(average_change) + '\n')
-    csvwriter.writerow('Greatest Increase in Revenue: $ ' + str(gt_revenue_increase) + gt_revenue_increase_month)
-    csvwriter.writerow('Greatest Decrease in Revenue: $'  + str(gt_revenue_decrease) + gt_revenue_decrease_month)
+    csvwriter.writerow('Total: $' + str(total_prof_loss) + '\n') 
+    csvwriter.writerow('Average Change: $' + str(average_change) + '\n')
+    csvwriter.writerow('Greatest Increase in Profits: $ ' + str(gt_revenue_increase) + gt_revenue_increase_month)
+    csvwriter.writerow('Greatest Decrease in Profits: $'  + str(gt_revenue_decrease) + gt_revenue_decrease_month)
     
     
 
