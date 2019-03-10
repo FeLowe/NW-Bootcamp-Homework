@@ -47,7 +47,7 @@ average_change = (total_prof_loss / total_months)
 print average_change
 
 # Specify the file to write to
-output_path = os.path.join("output.csv")
+output_path = os.path.join("pybank_output.csv")
 
 # Open the file using "write" mode. Specify the variable to hold the contents
 with open(output_path, 'w') as csvfile:
