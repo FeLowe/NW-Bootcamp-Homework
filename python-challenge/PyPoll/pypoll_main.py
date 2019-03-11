@@ -46,8 +46,29 @@ with open(file) as csvfile:
         vote_percentage_per_candidate = round(float(votes_per_candidate) / float(total_votes) * 100)
         #print vote_percentage_per_candidate = 63.0, 3.0, 20.0, 14.0
 
-        #calculates winning vote count and candidate
+        #gets winner candidate
         if (total_votes > winner_count):
             winner_count = total_votes
             winner_candidate = candidate
-    print winner_candidate    
+    #print winner_candidate = Khan 
+
+
+#File to write results to
+output_path = os.path.join("pybank_output.txt")
+output_path = os.path.join("pybank_output.csv")
+
+#Whites results to output file
+with open(file_to_output, "w") as csvfile:
+
+    #Initialize csv.writer
+    csvwriter = csv.writer(csvfile)
+
+    #Write the first row (column headers)
+    csvwriter.writerow('Election Results\n')
+    csvwriter.writerow('----------------------------' + '\n')
+    # Write the second row forwards
+    csvwriter.writerow('Total Votes: ' + str(total_votes) + '\n')
+    csvwriter.writerow('----------------------------' + '\n')
+    csvwriter.writerow(candidate_votes + str(vote_percentage_per_candidate))
+    csvwriter.writerow('Winner:' + winner_candidate + '\n') 
+    
