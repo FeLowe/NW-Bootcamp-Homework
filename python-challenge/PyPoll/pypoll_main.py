@@ -43,7 +43,7 @@ with open(file) as csvfile:
         #calculates percentage of each candidate votes
         votes_per_candidate = candidate_votes.get(candidate)
         #print votes_per_candidate = 2218231, 105630, 704200, 492940
-        vote_percentage_per_candidate = float(votes_per_candidate) / float(total_votes) * 100
+        vote_percentage_per_candidate = round(float(votes_per_candidate) / float(total_votes) * 100)
         print vote_percentage_per_candidate
         #calculates winning vote count and candidate
         if (total_votes > winner_count):
