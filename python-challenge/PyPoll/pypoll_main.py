@@ -52,23 +52,30 @@ with open(file) as csvfile:
             winner_candidate = candidate
     #print winner_candidate = Khan 
 
-
 #File to write results to
-output_path = os.path.join("pybank_output.txt")
-output_path = os.path.join("pybank_output.csv")
+output_path = os.path.join("pypoll_output.txt")
+output_path = os.path.join("pypoll_output.csv")
 
 #Whites results to output file
-with open(file_to_output, "w") as csvfile:
+with open(output_path, "w") as csvfile:
 
-    #Initialize csv.writer
+    #Initialize file writers
     csvwriter = csv.writer(csvfile)
 
-    #Write the first row (column headers)
+    dictwriter = csv.DictWriter(csvfile),
+
+    #Write the first row (header)
     csvwriter.writerow('Election Results\n')
     csvwriter.writerow('----------------------------' + '\n')
-    # Write the second row forwards
     csvwriter.writerow('Total Votes: ' + str(total_votes) + '\n')
+            #print total_votes = 3521001
     csvwriter.writerow('----------------------------' + '\n')
-    csvwriter.writerow(candidate_votes + str(vote_percentage_per_candidate))
-    csvwriter.writerow('Winner:' + winner_candidate + '\n') 
+    for candidate in candidate_votes:
+        dictwriter.writerow((candidate[0] + ": " + str(candidate[2]) + str(candidate[1]) '%' + ')\n')
+            #print candidate_votes = {'Khan': 2218231, "O'Tooley": 105630, 'Correy': 704200, 'Li': 492940}
+            #print vote_percentage_per_candidate = 63.0, 3.0, 20.0, 14.0
+    csvwriter.writerow('Winner:' + winner_candidate + '\n')
+            #print winner_candidate = Khan 
+
+       
     
