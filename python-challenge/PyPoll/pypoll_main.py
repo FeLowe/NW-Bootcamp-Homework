@@ -14,18 +14,27 @@ winning_count = 0
 with open(file) as csvfile:
     csv_data = csv.reader(csvfile, delimiter=',')
     header_out = next(csv_data, None)
-
-#"Voter ID(row[0])	County(row[1])	Candidate"(row[2])
+  
+# -----------------------------------    
+    #loops through each row in the csv file
     for row in csv_data:
-        #counts total votes
-        total_votes = total_votes +1
 
-       #gets candidate name at "Candidate" column
+        #adds each vote to the total_votes
+        total_votes = total_votes + 1 
+
+        #gets candidate name at "Candidate" column row[2]
         candidate_name = row[2]
-    #loops through all cadidate names in cadidates list and calculates candidate votes    
-    if candidate_name not in candidates_list:
-        candidates_list.append(candidate_name)
-        candidate_votes[candidate_name] = 0
-    candidate_votes[candidate_name] = candidate_votes[candidate_name] + 1
-        
-    print candidate_votes    
+
+        #checks if the candidate name is not in cadidate list.
+        if candidate_name not in candidates_list:
+
+            #adds candidate name to candidate list
+            candidates_list.append(candidate_name)
+
+            #counts candidate votes by name
+            candidate_votes[candidate_name] = 0
+
+        #adds a vote to that candidate's count
+        candidate_votes[candidate_name] = candidate_votes[candidate_name] + 1
+    #print candidate_votes
+    print total_votes
