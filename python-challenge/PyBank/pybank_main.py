@@ -64,17 +64,17 @@ with open(output_path,'w') as csvfile:
 
 
     # Initialize csv.writer
-    csvwriter = csv.writer(csvfile)
+    #csvwriter = csv.writer(csvfile)
 
     # Write the first row (column headers)
-    csvwriter.writerow('Financial Analysis\n')
-    csvwriter.writerow('----------------------------' + '\n')
+    csvfile.write('Financial Analysis\n')
+    csvfile.write('----------------------------' + '\n')
     # Write the second row forwards
-    csvwriter.writerow('Total Months: ' + str(total_months) + '\n')
-    csvwriter.writerow('Total: $' + str(total_revenue_sum) + '\n') 
-    csvwriter.writerow('Average Change: $' + str(average_change) + '\n')
-    csvwriter.writerow('Greatest Increase in Profits: $ ' + str(gt_revenue_increase) + gt_revenue_increase_month)
-    csvwriter.writerow('Greatest Decrease in Profits: $' + str(gt_revenue_decrease) + gt_revenue_decrease_month)
+    csvfile.write('Total Months: ' + str(total_months) + '\n')
+    csvfile.write('Total: $' + str(total_revenue_sum) + '\n') 
+    csvfile.write('Average Change: $' + str(average_change) + '\n')
+    csvfile.write('Greatest Increase in Profits: $ ' + str(gt_revenue_increase) + str(gt_revenue_increase_month) + '\n')
+    csvfile.write('Greatest Decrease in Profits: $' + str(gt_revenue_decrease) + str(gt_revenue_decrease_month) + '\n')
     
 
 
