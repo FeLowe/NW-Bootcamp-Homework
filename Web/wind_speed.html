@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Bootstrap font awesome / social media icons-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="assets/style.css">
+    
+    <title>Data Flowe</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                    <a class="navbar-brand" href="landing.html" id = "logo2" style= "font-size:35px"> <b  style="color: orange">Latitude</b></a>
+                    <span class="sr-only">(current)</span>
+
+            </div>
+
+            <div class="nav navbar-nav navbar-right">
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Plots<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="temperature.html">Max Temperature</a></li>
+                        <li><a href="humidity.html">Humidity</a></li>
+                        <li><a href="cloudness.html">Cloudness</a></li>
+                        <li><a href="wind_speed.html">Wind Speed</a></li>
+                    </ul>
+                </li>
+                <li><a href="comparison.html"> Comparison</a></li>
+                <li><a href="data.html"> Data</a></li>                                           
+            </div>
+        </div>      
+    </nav>
+
+    <div class = "container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                    <h2 class="header" style = "color:orange">Wind Speed</h2>
+                    <hr>
+                    <div class="pull-left"><img class="img img-responsive" src="Resources\assets\images\lat_vs_wind.png" alt="Latitude vs Wind"
+                    ></div>
+                    <div class="pull-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>      
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12">
+                <div class="panel panel-default">
+                        <div class="panel-body">                                    
+                            <h2 style = "color:orange">Visualizations</h2>
+                            <hr>
+
+                            <div class="row" >
+                                <div class="col-md-6">
+                                    <a href="temperature.html"><img class = "img img-responsive" src="Resources\assets\images\max_temp.png" alt="Max Temperature">
+                                    </a>
+                                </div>
+
+                                <div class="col-md-6">
+                                <a href="humidity.html"><img class = "img img-responsive" src="Resources\assets\images\lat_vs_hum.png" alt="Latitude vs Humidity"></a>
+                            </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6"><a href="cloudness.html"><img class = "img img-responsive" src="Resources\assets\images\lat_vs_cloud.png"  alt="Latitude vs Cloudiness"></a>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <a href="wind_speed.html"><img class = "img img-responsive" src="Resources\assets\images\lat_vs_wind.png" alt="Latitude vs Wind"></a>
+                                </div>
+                            </div>
+                                
+                        </div>
+                </div>     
+            </div>    
+    </div>
+</body>
+<hr>
+<footer>
+        <div class = "container-fluid bottom-footer page-footer">
+            <div class="row">
+                    <div class="text-center center-block">
+                        <a href="https://www.linkedin.com/in/fernanda-lowe/"><i class="fa fa-linkedin" style="font-size:32px"></i></a>
+                        <a href="https://github.com/FeLowe"><i class="fa fa-github" style="font-size:32px;color:black"></i></a>
+                        <p> &copy; Copyright Flowe | Northwestern Data Science Bootcamp 2019</p>
+                    </div>                	
+            </div>                    
+        </div>
+</footer>
+
+</html>

@@ -1,0 +1,47 @@
+body{
+  background-color: lightgray; 
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar navbar-default, navbar-brand {
+color: #d46512;
+}
+
+.header{
+  color: #d46512;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+}
+
+.container {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.img:hover {
+  opacity: 0.3;
+}
+.fa {
+  padding: 40px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+  opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+.fa fa-github{
+  color: #fff;
+}
+.fa-linkedin {
+  color: #007bb6
+}
+
+
