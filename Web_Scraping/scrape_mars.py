@@ -98,7 +98,7 @@ def scrape():
             hemisphere_image_urls.append({"title": title, "img_url": image_url})
 
         mars_data = {
-            "News_Title": news_title,
+            "News Title": news_title,
             "News Paragraph": news_p,
             "Featured Image": featured_img,
             "Weather": mars_weather,
@@ -106,6 +106,10 @@ def scrape():
             }
             #print(mars_data)
 
+        # Close the browser after scraping
+        browser.quit()
+
+        # Return results
         return mars_data
 
 
