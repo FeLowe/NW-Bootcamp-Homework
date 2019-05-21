@@ -12,41 +12,41 @@
 <body>
   <div class="container-fluid">
     <div class="jumbotron text-center">
-
       <h1>Mars News</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get News!</a></p>
+        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get News!</a></p>
     </div>
 
-    <h1>Latest News</h1>
+    <h1>Latest About Mars</h1>
+    
     <h3>{{ mars.news_title }}</h3>
-    <p>{{ mars.news_p }}</p>
+      <p>{{ mars.news_p }}</p>
 
     <h3>Weather</h3>
-    <p>{{ mars.mars_weather }}</p>
+      <p>{{ mars.mars_weather }}</p>
+
+    <h3>Facts</h3>
+      <p>{{mars.mars_html_table| safe}}</p>
+
+      <!-- {% autoescape false %}
+        <p>{{ mars.mars_html_table }}</p>
+      {% endautoescape %} -->
 
     <h3>Featured Image</h3>
-    <img src="{{ mars.featured_img }}" alt="Mars Featured Image">
+      <img src="{{ mars.featured_img }}" alt="Mars Featured Image">
 
-    <h3>Hemisphere Images</h3>
-    {% for hemisphere in mars.hemisphere_image_urls %}
-    <div class="col-md-12">
+    <h3>Hemispheres Image</h3>
+      {% for hemisphere in mars.hemisphere_image_urls %}
+      <div class="col-md-6">
         <h5><b>{{hemisphere.title}}</b></h5>
         <div class="thumbnail">
         <img src="{{hemisphere.img_url}}">
         <div class="caption">   
-    </div>
+        </div>
+        </div>
+      </div>
   </div>
-</div>
   {% endfor %}
-  </body>
+</body>
 
-  </html>     
+</html>     
 
-    <!-- <ul style="list-style: none;">
-      Loop through the dictionary
-      {% for hemisphere in mars %}
-        <li style="color:blue">{{ hemisphere.title }} {{ hemisphere.image_url }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  </div> -->

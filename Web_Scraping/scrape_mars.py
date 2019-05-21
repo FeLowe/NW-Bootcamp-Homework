@@ -13,11 +13,7 @@ def scrape():
     # ## NASA Mars News
     mars_news_url = "https://mars.nasa.gov/news"
 
-    # Use Panda's `read_html` to parse the url
     mars_news_request = requests.get(mars_news_url)
-    mars_news_request
-
-    # Create BeautifulSoup object; parse with 'html.parser'
     news_soup = BeautifulSoup(mars_news_request.text, 'html.parser')
 
     news_title = news_soup.find('div', 'a', class_="content_title").text
@@ -45,10 +41,7 @@ def scrape():
 
     mars_weather_url = "https://twitter.com/marswxreport?lang=en)"
 
-    # Use Panda's `read_html` to parse the url
     weather_request = requests.get(mars_weather_url)
-
-    # Create BeautifulSoup object; parse with 'html.parser'
     weather_soup = BeautifulSoup(weather_request.text, 'html.parser')
 
     mars_weather= weather_soup.find('p', class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text").text
@@ -101,6 +94,7 @@ def scrape():
         "news_p": news_p,
         "featured_img": featured_img,
         "mars_weather": mars_weather,
+        "mars_html_table": mars_html_table,
         "hemisphere_image_urls": hemisphere_image_urls
         }
         #print(mars_data)
