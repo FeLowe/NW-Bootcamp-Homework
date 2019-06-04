@@ -39,7 +39,7 @@ d3.select("#filter-btn").on("click", buttonClick);
 
 buildTable(tableData)
 
-// ATTEMPT TO RETURN FULL TABLE IF THERE IS NO USER INPUT->DOES FILTER THE TABLE - TO WORK ON LATER.
+// ATTEMPT TO RETURN FULL TABLE IF THERE IS NO USER INPUT->DOES NOT FILTER THE TABLE - TO WORK ON LATER.
 
 //Function that handle buttom click
 // function buttonClick(){
