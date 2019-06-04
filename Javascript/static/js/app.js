@@ -18,6 +18,7 @@ tbody.html("");
     });
   });
 }
+
 //Function that handle buttom click
 function buttonClick(){
 
@@ -28,7 +29,7 @@ function buttonClick(){
   var dateInput = d3.select("#date").property("value");
 
   // Filter data based on user input
-  if (dateInput){
+  if (!dateInput){
   var filteredDate = tableData.filter(ufo => ufo.datetime === dateInput || dateInput === "");
 } 
   buildTable(filteredDate);
@@ -37,3 +38,28 @@ function buttonClick(){
 d3.select("#filter-btn").on("click", buttonClick);
 
 buildTable(tableData)
+
+// ATTEMPT TO RETURN FULL TABLE IF THERE IS NO USER INPUT->DOES FILTER THE TABLE - TO WORK ON LATER.
+
+//Function that handle buttom click
+// function buttonClick(){
+
+//   //Prevents page from refreshing
+//   d3.event.preventDefault(); 
+  
+//   //Takes user's input
+//   var dateInput = d3.select("#date").property("value");
+
+//   //Filters data based on user input
+//   if (!dateInput){
+//   var filteredDate = tableData.filter(ufo => ufo.datetime === dateInput);
+//    buildTable(filteredDate);
+// } 
+// else{
+//   buildTable (tableData)
+// }
+// }
+// //Selects submit button
+// d3.select("#filter-btn").on("click", buttonClick);
+
+// buildTable(tableData)
