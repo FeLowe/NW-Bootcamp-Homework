@@ -6,7 +6,7 @@ function buildMetadata(sample) {
   // Use `d3.json` to fetch the metadata for a sample
   d3.json(metadata_url).then(function(metada_response){
     
-    console.log(metadata_response)
+    // console.log(metadata_response)
     // Use d3 to select the panel with id of `#sample-metadata`
     var metadata_selector = d3.select("#sample-metadata");
     // Use `.html("") to clear any existing metadata
@@ -15,8 +15,13 @@ function buildMetadata(sample) {
     // Hint: Inside the loop, you will need to use d3 to append new
     // tags for each key-value in the metadata.
     Object.entries(metada_response).forEach(([key, value]) => {
-      metadata_selector.append("li").text(`${key}: ${value}`);
-      console.log(key, value);
+      metadata_selector
+      .append("h5")
+      .text(`${key}: ${value}`)
+      .property("key", key)
+      .property("value", value);
+      
+      console.log("key:", key, "value:", value);
     })
   })
     // BONUS: Build the Gauge Chart
@@ -25,62 +30,85 @@ function buildMetadata(sample) {
 
 function buildCharts(sample) {
 
+  console.log("I am inside charts");
+  
   var chart_url = `/samples/${sample}`
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
-  d3.json(chart_url ).then(function(chart_response){
-    console.log(chart_response)
+  d3.json(chart_url).then((chart_response)=>{
+    
+    console.log("chart response:", chart_response)
 
-    var otu_ids = chart_response.otus_ids;
-    var otu_labels = chart_response.otu_lables;
+    var otu_ids = chart_response.otu_ids;
+    var otu_labels = chart_response.otu_labels;
     var sample_values = chart_response.sample_values;
-    
-    console.log(otu_ids, otu_labels, sample_values);
 
-     // @TODO: Build a Bubble Chart using the sample data
-    var bubble_trace = {
-      x: otu_ids,
-      y: sample_values,
-      text: otu_labels,
-      mode: 'markers',
-      marker: {
-        color: otu_ids,
-        size: sample_values,
-        showscale: True
-      }
-    };
+    console.log("ids:", otu_ids, "labels:", otu_labels, "values:", sample_values);
 
-    var bubble_data = [bubble_trace];
+      // Create array of Objects (one Object for each sample) 
+      var sample_data = [];
 
-    var bubble_layout = {
-      title: 'Marker Size and Color',
-      showlegend: false,
-      height: 600,
-      width: 600
-    };
-
-    Plotly.newPlot("bubble", bubble_data, bubble_layout);
+      for (var i=0; i < otu_ids.length; i++) {
+        data_dict = {};
   
-    // @TODO: Build a Pie Chart
-
-    // HINT: You will need to use slice() to grab the top 10 sample_values,
+        data_dict["otu_ids"] = otu_ids[i];
+        data_dict["sample_values"] = sample_values[i];
+        data_dict["otu_labels"] = otu_labels[i];
+  
+        sample_data[i] = data_dict;
+  
+        console.log(data_dict)
+      };  
+      
+      // Sorts descending
+      sample_data.sort(function compareFunction(first, second) {
+        return second.sample_values - first.sample_values;
+      });
+  
+     // HINT: You will need to use slice() to grab the top 10 sample_values,
     // otu_ids, and labels (10 each).
-    var pie_data = [{
-      values: chart_response.sample_values.slice(0, 11),
-      ids: chart_response.otu_ids.slice(0, 11),
-      labels: chart_response.otu_labels.slice(0, 11),
-      type: "pie"
-    }];
-    
+      sample_data_top10 = sample_data.slice(0, 10);
+
+      console.log (sample_data_top10)
+
+      var pie_data = [{
+        values: sample_data_top10.map(values => values.sample_values),
+        labels: sample_data_top10.map(ids => ids.otu_ids),
+        text: sample_data_top10.map(labels =>labels.otu_labels),
+        type: "pie",
+        startAngle: 500,
+      }];
+
     var pie_layout = {
-      title: "Bacterial Samples"
+      title: "Top 10 Bacterial Samples"
     };
 
     Plotly.newPlot("pie", pie_data, pie_layout);
 
+    // @TODO: Build a Bubble Chart using the sample data
+    var bubble_trace = [{
+      x: otu_ids,
+      y: sample_values,
+      text: otu_labels,
+      type: 'scatter',
+      mode: 'markers',
+      marker: {
+        color: otu_ids,
+        size: sample_values,
+        colorscale: 'Earth',
+        showscale: true
+      }
+    }];
+
+    var bubble_layout = {
+      title:'Bacterial Ids vs Values',
+      showlegend: false,
+    };
+
+    Plotly.newPlot("bubble", bubble_trace , bubble_layout);
+
   })
 }
-
 function init() {
   // Grab a reference to the dropdown select element
   var selector = d3.select("#selDataset");
