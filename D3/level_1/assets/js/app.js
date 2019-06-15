@@ -100,9 +100,10 @@ d3.csv("data.csv").then(function(censusData) {
         return d.abbr;
       })
       .attr("font-family", "sans-serif")
-      .attr("font-size", "10px")
+      .attr("font-size", "12px")
       .attr("text-anchor", "middle")
-      .attr("fill", "white");
+      .attr("fill", "black")
+      .attr("stroke", "black");
 
     //Initialize tool tip
     var toolTip = d3.tip()

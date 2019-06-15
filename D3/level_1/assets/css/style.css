@@ -9,6 +9,10 @@ html {
   min-height: 100%;
 }
 
+h1 {
+  color: "orange"
+}
+
 body {
   /* Padding bottom by footer height */
   padding-bottom: 80px;
@@ -27,9 +31,7 @@ body {
 
 #footer p {
   margin: 0;
-  font-size: 16px;
-
-  
+  font-size: 16px; 
 }
 
 .tooltip {
@@ -49,6 +51,18 @@ body {
 .axisText {
   font-family: sans-serif;
   font-weight: bold;
-  fill: #551aaf;
+  fill:orangered;
   text-anchor: middle;
+}
+
+.article {
+padding-left: 15px;
+padding-right: 15px;
+text-align: center;
+
+}
+
+#scatter{
+width:100% !important; 
+height:100% !important;
 }
