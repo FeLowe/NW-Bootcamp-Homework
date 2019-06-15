@@ -1,6 +1,20 @@
+
+function makeResponsive() {
+
+  // if the SVG area isn't empty when the browser loads,
+  // remove it and replace it with a resized version of the chart
+var svgArea = d3.select("body").select("svg");
+
+if (!svgArea.empty()) {
+  svgArea.remove();
+}
 // @TODO: YOUR CODE HERE!
-var svgWidth = 960;
-var svgHeight = 500;
+// var svgWidth = 960;
+// var svgHeight = 500;
+
+// svg params
+var svgHeight = window.innerHeight;
+var svgWidth = window.innerWidth;
 
 var margin = {
   top: 20,
@@ -83,15 +97,13 @@ d3.csv("data.csv").then(function(censusData) {
 });
 
     // Create tooltip in the chart
-    // ==============================
     scatterGroup.call(toolTip);
 
-    // Step 8: Create event listeners to display and hide the tooltip
-    // ==============================
+    // Create event listeners to display and hide the tooltip
     circlesGroup.on("click", function(data) {
       toolTip.show(data, this);
     })
-      // onmouseout event
+      //mouseout event
       .on("mouseout", function(data, index) {
         toolTip.hide(data);
       });
@@ -110,6 +122,13 @@ d3.csv("data.csv").then(function(censusData) {
       .attr("class", "axisText")
       .text("In Poverty (%)");
   });
+}
+
+makeResponsive();
+
+// Event listener for window resize.
+// When the browser window is resized, makeResponsive() is called.
+d3.select(window).on("resize", makeResponsive);
 
 
 //     //Initialize tool tip
