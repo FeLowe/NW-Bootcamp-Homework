@@ -47,7 +47,7 @@ d3.csv("data.csv").then(function(censusData) {
         data.poverty = +data.poverty;
         data.healthcare = +data.healthcare;
 
-        console.log("poverty rate:", data.poverty)
+        // console.log("poverty rate:", data.poverty)
     });
 
     //Create scale functions
