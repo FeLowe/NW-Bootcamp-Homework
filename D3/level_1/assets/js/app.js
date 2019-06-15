@@ -1,8 +1,8 @@
 
 function makeResponsive() {
 
-  // if the SVG area isn't empty when the browser loads,
-  // remove it and replace it with a resized version of the chart
+// if the SVG area isn't empty when the browser loads,
+// remove it and replace it with a resized version of the chart
 var svgArea = d3.select("body").select("svg");
 
 if (!svgArea.empty()) {
@@ -20,7 +20,7 @@ var margin = {
   top: 20,
   right: 40,
   bottom: 60,
-  left: 100
+  left: 50
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -53,7 +53,7 @@ d3.csv("data.csv").then(function(censusData) {
     //Create scale functions
     var xLinearScale = d3.scaleLinear()
         .domain([8, d3.max(censusData, d => d.poverty)])
-        .range([0, width]);
+        .range([0, width -200]);
 
     var yLinearScale = d3.scaleLinear()
         .domain([0, d3.max(censusData, d => d.healthcare)])
@@ -77,30 +77,46 @@ d3.csv("data.csv").then(function(censusData) {
     .data(censusData)
     .enter()
     .append("circle")
-    .attr("cx", d => xLinearScale(d.poverty)-4)
-    .attr("cy", d => yLinearScale(d.healthcare)+2)
+    .attr("cx", d => xLinearScale(d.poverty))
+    .attr("cy", d => yLinearScale(d.healthcare))
     .attr("r", "15")
     .attr("fill", "orange")
     .attr("opacity", ".5")
  
+    //Create circle labels
+    var circleLabels = scatterGroup.selectAll(null)
+    .data(censusData)
+    .enter()
+    .append("text");
 
-    circlesGroup.append("text").text(d=>d.abbr)
-    .style("font-size",".6em")
-    .classed("fill-text", true);
+    circleLabels
+      .attr("x", function(d) {
+        return xLinearScale(d.poverty);
+      })
+      .attr("y", function(d) {
+        return yLinearScale(d.healthcare);
+      })
+      .text(function(d) {
+        return d.abbr;
+      })
+      .attr("font-family", "sans-serif")
+      .attr("font-size", "10px")
+      .attr("text-anchor", "middle")
+      .attr("fill", "white");
 
     //Initialize tool tip
     var toolTip = d3.tip()
       .attr("class", "tooltip")
       .offset([80, -60])
       .html(function(d) {
-  return (`${d.state}/${d.abbr}<tr> <br>Poverty: ${d.poverty}<br>Healthcare: ${d.healthcare}`);
+  return (`${d.state}<tr> <br>Poverty: ${d.poverty}<br>Healthcare: ${d.healthcare}`);
 });
 
     // Create tooltip in the chart
     scatterGroup.call(toolTip);
 
     // Create event listeners to display and hide the tooltip
-    circlesGroup.on("click", function(data) {
+    circleLabels.on("click", function(data) {
       toolTip.show(data, this);
     })
       //mouseout event
@@ -111,7 +127,7 @@ d3.csv("data.csv").then(function(censusData) {
     // Create axes labels
     scatterGroup.append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", 0 - margin.left + 40)
+      .attr("y", 0 - margin.left)
       .attr("x", 0 - (height / 2))
       .attr("dy", "1em")
       .attr("class", "axisText")
@@ -130,30 +146,3 @@ makeResponsive();
 // When the browser window is resized, makeResponsive() is called.
 d3.select(window).on("resize", makeResponsive);
 
-
-//     //Initialize tool tip
-//     var toolTip = d3.tip()
-//     .attr("class", "tooltip")
-//     .offset([80, -60])
-//     .html(function(data) {
-//         var state = data.state;
-//         var state_code = data.abbr;
-//         var poverty_rate = +data.poverty;
-//         var healthcare_rate = +data.healthcare;
-
-//       return (`In ${state} / ${state_code}<br>Poverty rate is: ${poverty_rate}<br>And Healthcare rate is:${healthcare_rate}`);
-//     // var toolTip = d3.tip()
-//     //   .attr("class", "tooltip")
-//     //   .offset([80, -60])
-//     //   .html(function(row) {
-
-//     //   return (`In ${row.state} / ${row.abbr}<br>Poverty rate is: ${row.poverty}<br>And Healthcare rate is: ${row.healthcare}`);
-//     // });
-
-// });
-//     // Create tooltip in the chart
-//     scattherGroup.call(toolTip);
-    
-//     });
-
-// });
