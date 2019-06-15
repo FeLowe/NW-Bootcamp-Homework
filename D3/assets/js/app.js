@@ -89,9 +89,11 @@ function updateToolTip(chosenXAxis, circlesGroup) {
     return circlesGroup;
   }
 
-// Import Data
-d3.csv("data.csv", function(err, censusData) {
-    if (err) throw err;
+// Retrieve data from the CSV file and execute everything below
+d3.csv("data.csv").then(function(censusData) {
+    // if (err) throw err;
+
+    console.log(censusData);
 
     // Parse Data/Cast as numbers
     censusData.forEach(function(data){
@@ -99,7 +101,6 @@ d3.csv("data.csv", function(err, censusData) {
         data.healthcare = +data.healthcare;
         data.smokes = +data.smokes;
         data.age = +data.age;
-
     });
 
     // xLinearScale function above csv import
@@ -157,7 +158,7 @@ d3.csv("data.csv", function(err, censusData) {
     .text("# of Smokers");
 
         // append y axis
-    chartGroup.append("text")
+    scatterGroup.append("text")
         .attr("transform", "rotate(-90)")
         .attr("y", 0 - margin.left)
         .attr("x", 0 - (height / 2))
