@@ -1,16 +1,15 @@
-// create map
+// Create map
 var map = L.map("map-id", {
   center: [37.09, -95.71],
-  zoom: 4
+  zoom: 5
 });
-
-// Set color array for magnitude
 
 // var mag_colors = ["light green", "light", "dark yellow", "orange", "light red","dark red"]
 
-var mag_colors = ["#CCFF33", "#FFE533", "#FFBA33", "#FF8C33", "#FF6533","#FF3F33"]
+// Set magnitude colors
+var mag_colors = ["#CCFF33", "#FFE533", "#FFBA33", "#FF8C33", "#FF6533","#F61103"]
 
-function getColor(magnitude){
+function magnitudeColor(magnitude){
   if (magnitude < 1){
     color = mag_colors[0];
   } else if (magnitude >= 1 && magnitude < 2){
@@ -35,48 +34,49 @@ function getColor(magnitude){
     accessToken: API_KEY
   }).addTo(map)
 
-// Store our API endpoint inside queryUrl
+//API endpoint
 var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-
+// API call
 d3.json(url, function(response) {
   var data = response["features"];
 
-//Loop through the data and create markers for each earthquake,
-//bind popup containing magnitude, depth, time and color based on magnitude
+    // Create circle markers
 for (var i = 0; i < data.length; i++) {
-  var location = data[i]["geometry"]["coordinates"];
+  var coordinates = data[i]["geometry"]["coordinates"];
   var magnitude = data[i]["properties"]["mag"];
-  var title = data[i]["properties"]["title"];
+  var location = data[i]["properties"]["title"];
   var coords = {
-    longitude: location["0"],
-    latitude: location["1"]
+    longitude: coordinates["0"],
+    latitude: coordinates["1"]
   };
-  
+
+
     var latlong = L.latLng(coords.latitude, coords.longitude);
-    var circle = L.circle(latlong, {
-      color: getColor(magnitude),
+    L.circle(latlong, {
+      color: magnitudeColor(magnitude),
       fillOpacity: 0.50,
-      radius: magnitude * 40000
+      radius: magnitude * 20000
     }).addTo(map);
 
+    //Create popups
     L.circle(latlong)
-      .bindPopup("<h1>" + title + "</h1> <hr> <h3>Magnitude: " + magnitude + "</h3><h3>Latitude: " + coords.latitude + "</h3><h3>Longitude: " + coords.longitude + "</h3>")
+      .bindPopup("<h3> Location: " + location + "</h3> <hr> <h3>Magnitude: " + magnitude + "</h3>")
       .addTo(map);
 }
 
 //Set up legend in bottom right
 var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map){
-  var div = L.DomUtil.create('div', 'info legend'),
-    grades = [0,1,2,3,4,5];
-    div.innerHTML = '<h3>Earthquake Magnitude</h3>'
+  var div = L.DomUtil.create('div', 'legend'),
+    mag_range = [0,1,2,3,4,5];
+    // div.innerHTML = '<h3>Earthquake Magnitude</h3>'
 
 // Loop through our intervals and generate a label with a color square for each interval
-  for (var i = 0; i < grades.length; i++){
+  for (var i = 0; i < mag_range.length; i++){
     div.innerHTML +=
       '<i class="legend" style="background:' + mag_colors[i] + '; color:' + mag_colors[i] + ';">....</i>' +
-      grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '++');
+      mag_range[i] + (mag_range[i + 1] ? '&ndash;' + mag_range[i + 1] + '<br>' : '++');
   }
   return div;
 };
